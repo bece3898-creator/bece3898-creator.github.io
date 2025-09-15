@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Benjamen Centeno — Portfolio</title>
+
+  <!-- Adobe Fonts + Site Styles -->
+  <link rel="stylesheet" href="https://use.typekit.net/jpg0kkq.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <div class="brand">
+        <h1 class="leading-tight">Benjamen Centeno</h1>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="bio.html">Bio</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Intro -->
+    <section class="section-surface">
+      <div class="container grid grid-2">
+        <div>
+          <h2>Environmental Product Designer</h2>
+          <p>
+            I combine sustainable materials, small-batch manufacturing, and mechanical craft
+            to build functional products.
+          </p>
+          <div class="stack-12">
+            <a class="btn btn-muted" href="projects.html">View Projects</a>
+            <a class="btn" href="bio.html">About Me</a>
+          </div>
+        </div>
+        <div>
+          <img class="round" src="783A7693.jpg">
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlighted Project -->
+    <section>
+      <div class="container">
+        <h2>Highlighted Project</h2>
+        <article class="card">
+          <h3><a href="projects.html">Recycled Dog Bowls</a></h3>
+          <p>
+            Durable bowls made from old 5-gallon buckets, frisbee discs, and colorful factory scraps.
+            Each piece diverts plastic from waste streams while serving dog owners in Boulder.
+          </p>
+          <div><a class="btn btn-accent" href="projects.html">See It!</a></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container small">© 2025 Benjamen Centeno</div>
+  </footer>
+
+  <script>
+    // Optional: ensure current nav highlight if filenames differ
+    const here = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('nav a').forEach(a=>{
+      if(a.getAttribute('href')===here){ a.setAttribute('aria-current','page'); }
+    });
+  </script>
+</body>
+</html>

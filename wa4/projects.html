@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Benjamen Centeno</title>
+  <link rel="stylesheet" href="https://use.typekit.net/jpg0kkq.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <div class="brand"><h1>Benjamen Centeno</h1></div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bio.html">Bio</a></li>
+          <li><a href="projects.html" aria-current="page">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-surface">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="grid grid-3">
+          <article class="card">
+            <img src="12.13.24_BenCenteno-001.JPG">
+            <h3>Recycled Dog Bowls</h3>
+            <p>Bowls made from 5-gallon buckets, frisbee discs, and factory scraps. Designed for durability and the enviorment.</p>
+          </article>
+
+          <article class="card">
+            <img src="A06.4_Final Prototype+Presentation_Board_2__Benjamen_Centeno_04292024.pdf">
+            <h3>PALMS</h3>
+            <p>Proctective cover for wheelchair user's gloves.</p>
+          </article>
+
+          <article class="card">
+            <img src="SQ righty SQ.JPG">
+            <h3>SQUOOSH</h3>
+            <p>The transformative camping lantern designed to fit any of your outdoor needs.</p> 
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container small">© 2025 Benjamen Centeno</div>
+  </footer>
+
+  <script>
+    const here = location.pathname.split('/').pop() || 'projects.html';
+    document.querySelectorAll('nav a').forEach(a=>{
+      if(a.getAttribute('href')===here){ a.setAttribute('aria-current','page'); }
+    });
+  </script>
+</body>
+</html>
