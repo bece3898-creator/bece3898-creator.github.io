@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="ica5.css" />
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <h3>Community Garden Project</h3>
+      <button
+        class="expand-btn"
+        type="button"
+        aria-label="Expand details"
+        aria-expanded="false"
+        aria-controls="card-details"
+      >+</button>
+    </div>
+
+    <div class="card-content">
+      <p class="summary">Join neighbors in creating a shared growing space...</p>
+      <div class="details" id="card-details">
+        <p>Meeting every Saturday at 10am. Tools provided. All skill levels welcome.</p>
+        <p>Contact: garden@community.org</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const expandBtn = document.querySelector('.expand-btn');
+    const details = document.querySelector('.details');
+
+    function toggleDetails() {
+      const isOpen = details.classList.toggle('show');
+      expandBtn.textContent = isOpen ? '−' : '+';
+      expandBtn.setAttribute('aria-expanded', String(isOpen));
+      expandBtn.setAttribute('aria-label', isOpen ? 'Collapse details' : 'Expand details');
+    }
+
+    expandBtn.addEventListener('click', toggleDetails);
+
+    // Keyboard support (Enter/Space) – buttons already handle this in most browsers,
+    // but this ensures consistency.
+    expandBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleDetails();
+      }
+    });
+  </script>
+</body>
+</html>

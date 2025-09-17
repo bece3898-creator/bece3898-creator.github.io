@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Benjamen Centeno — Portfolio</title>
 
-  <!-- Adobe Fonts + Site Styles -->
   <link rel="stylesheet" href="https://use.typekit.net/jpg0kkq.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -27,7 +26,6 @@
   </header>
 
   <main>
-    <!-- Hero / Intro -->
     <section class="section-surface">
       <div class="container grid grid-2">
         <div>
@@ -47,7 +45,6 @@
       </div>
     </section>
 
-    <!-- Highlighted Project -->
     <section>
       <div class="container">
         <h2>Highlighted Project</h2>
@@ -68,7 +65,6 @@
   </footer>
 
   <script>
-    // Optional: ensure current nav highlight if filenames differ
     const here = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('nav a').forEach(a=>{
       if(a.getAttribute('href')===here){ a.setAttribute('aria-current','page'); }

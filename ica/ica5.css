@@ -1,0 +1,70 @@
+/* Card layout (optional polish) */
+.card {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 1rem 1.25rem;
+  border: 2px solid #000;
+  border-radius: 0.75rem;
+}
+
+/* Phase 1: Flexbox header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+/* Expand button: circular + hover/focus */
+.expand-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.expand-btn:hover {
+  background: #f3f3f3;
+}
+.expand-btn:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
+
+/* Phase 3: Smooth transition for details */
+.card-content .summary {
+  margin-top: 1rem;
+}
+
+.details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease, opacity 300ms ease;
+  will-change: max-height, opacity;
+  margin-top: 0.5rem;
+}
+.details.show {
+  /* Set a max-height large enough for your content */
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .details {
+    transition: none;
+  }
+}
