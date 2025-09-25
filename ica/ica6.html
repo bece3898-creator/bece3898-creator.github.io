@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo Gallery – Grid</title>
+  <style>
+    :root { --gap: 1rem; }
+
+    /* Page layout as Grid */
+    .gallery-container {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      grid-template-areas:
+        "header header"
+        "nav    sidebar"
+        "main   sidebar";
+      gap: var(--gap);
+      padding: var(--gap);
+      max-width: 1200px;
+      margin: 0 auto;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.45;
+    }
+    .gallery-header  { grid-area: header; }
+    .gallery-nav     { grid-area: nav; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+    .gallery-grid    {
+      grid-area: main;
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .gallery-sidebar { grid-area: sidebar; padding: .5rem; border: 1px solid #e5e5e5; border-radius: 8px; }
+
+    /* Cards */
+    .photo-card {
+      height: 200px;
+      background: #f2f2f2;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      border: 1px solid #e5e5e5;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .photo-card.featured { height: 300px; grid-column: span 2; }
+
+    /* Hidden state for filtering (keeps transitions tidy) */
+    .hidden { display: none !important; }
+
+    /* Buttons */
+    .gallery-nav button {
+      padding: .5rem .75rem;
+      border: 1px solid #cfcfcf;
+      background: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+    }
+    .gallery-nav button:hover { outline: 2px solid #000; outline-offset: 2px; }
+    .gallery-nav button:focus-visible { outline: 3px solid #000; outline-offset: 2px; }
+    .gallery-nav button[aria-pressed="true"] {
+      border-color: #000;
+      font-weight: 600;
+    }
+
+    /* Mobile: collapse sidebar below */
+    @media (max-width: 800px) {
+      .gallery-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "nav"
+          "sidebar"
+          "main";
+      }
+      .photo-card.featured { grid-column: auto; } /* naturally 1 column on small screens */
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <header class="gallery-header"><h1>Photo Gallery</h1></header>
+
+    <nav class="gallery-nav" aria-label="Filter categories">
+      <button type="button" aria-pressed="true">All</button>
+      <button type="button">Nature</button>
+      <button type="button">Architecture</button>
+      <span id="count" aria-live="polite" style="margin-left:.5rem;"></span>
+    </nav>
+
+    <main class="gallery-grid">
+      <div class="photo-card" data-category="nature">Photo 1</div>
+      <div class="photo-card" data-category="architecture">Photo 2</div>
+      <div class="photo-card" data-category="nature">Photo 3</div>
+      <div class="photo-card featured" data-category="nature">Featured Photo</div>
+      <div class="photo-card" data-category="architecture">Photo 5</div>
+      <div class="photo-card" data-category="nature">Photo 6</div>
+    </main>
+
+    <aside class="gallery-sidebar">
+      <strong>Filter Options</strong>
+      <p>Try the buttons to filter by category. The grid will reflow automatically.</p>
+    </aside>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.gallery-nav button');
+    const cards   = document.querySelectorAll('.photo-card');
+    const countEl = document.getElementById('count');
+
+    function setActive(btn) {
+      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+    }
+
+    function filterPhotos(category) {
+      let visible = 0;
+      cards.forEach(card => {
+        const match = category === 'all' || card.dataset.category === category.toLowerCase();
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      if (countEl) countEl.textContent = `Showing ${visible} item${visible === 1 ? '' : 's'}`;
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setActive(btn);
+        const category = btn.textContent.trim().toLowerCase();
+        filterPhotos(category);
+      });
+    });
+
+    // initial count
+    filterPhotos('all');
+  </script>
+</body>
+</html>
