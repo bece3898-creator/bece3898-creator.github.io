@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CU Student Clothing Exchange – Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header" role="banner">
+<div class="brand">
+<img src="logo.svg" alt="CU Student Clothing Exchange logo" width="40" height="40" />
+<span class="brand-title">CU Student Clothing Exchange</span>
+</div>
+
+<nav class="site-nav" aria-label="Primary">
+<ul>
+<li><a href="index.html" aria-current="page">Home</a></li>
+<li><a href="resources.html">Listings</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<div class="prefs">
+<button id="contrastToggle" class="btn" aria-pressed="false">High Contrast</button>
+<label class="toggle">
+<input type="checkbox" id="reduceMotionToggle" />
+<span>Reduce motion</span>
+</label>
+</div>
+</header>
+
+<main id="main" class="grid-home" role="main">
+<section class="hero" aria-labelledby="hero-title">
+<h1 id="hero-title">Buy, Sell, Swap – On Campus</h1>
+<p>CU students only. Meet in person, try on before you buy, avoid shipping waste.</p>
+<form class="search" action="resources.html" method="get" role="search">
+<!-- Progressive enhancement: works without JS by submitting to resources.html?q=... -->
+<label for="q" class="visually-hidden">Search listings</label>
+<input id="q" name="q" type="search" placeholder="Search jackets, jeans, sizes…" />
+<button class="btn" type="submit">Search</button>
+</form>
+</section>
+
+<aside class="filters" aria-labelledby="filters-title">
+<h2 id="filters-title">Quick Filters</h2>
+<ul>
+<li><a href="resources.html?cat=tops" data-filter="tops" class="chip">Tops</a></li>
+<li><a href="resources.html?cat=outerwear" data-filter="outerwear" class="chip">Outerwear</a></li>
+<li><a href="resources.html?cat=bottoms" data-filter="bottoms" class="chip">Bottoms</a></li>
+<li><a href="resources.html?cat=shoes" data-filter="shoes" class="chip">Shoes</a></li>
+</ul>
+</aside>
+
+<section class="spotlight" aria-labelledby="spotlight-title">
+<h2 id="spotlight-title">Spotlight</h2>
+<article class="card" tabindex="0">
+<img src="images/coat.jpg" alt="Navy winter coat, size M" loading="lazy" />
+<div class="card-body">
+<h3>Winter Coat (M)</h3>
+<p>Warm and lightly used. Pickup at UMC.</p>
+<button class="btn btn-small" data-action="save" data-id="c1">Save</button>
+<button class="btn btn-small" data-action="details" aria-expanded="false" aria-controls="c1-details">Details</button>
+<div id="c1-details" hidden>
+<p>Condition: Excellent. Price: $35. Seller prefers weekend meetups.</p>
+</div>
+</div>
+</article>
+
+<article class="card" tabindex="0">
+</html>

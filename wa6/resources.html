@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CU Student Clothing Exchange – Listings</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header compact">
+<a class="brand brand-link" href="index.html">CU Student Clothing Exchange</a>
+<form class="toolbar" id="filterForm" action="resources.html" method="get">
+<!-- Progressive enhancement: submit filters without JavaScript -->
+<label for="search" class="visually-hidden">Search listings</label>
+<input id="search" name="q" type="search" placeholder="Search by keyword" />
+
+<label for="category" class="visually-hidden">Category</label>
+<select id="category" name="cat">
+<option value="">All categories</option>
+<option value="tops">Tops</option>
+<option value="outerwear">Outerwear</option>
+<option value="bottoms">Bottoms</option>
+<option value="shoes">Shoes</option>
+</select>
+
+<label for="size" class="visually-hidden">Size</label>
+<select id="size" name="size">
+<option value="">Any size</option>
+<option value="XS">XS</option>
+<option value="S">S</option>
+<option value="M">M</option>
+<option value="L">L</option>
+<option value="XL">XL</option>
+</select>
+
+<button class="btn" type="submit">Apply</button>
+</form>
+</header>
+
+<main id="main" class="grid-resources">
+<aside class="sidebar" aria-labelledby="a11y-title">
+<h2 id="a11y-title">Accessibility & Preferences</h2>
+<button id="contrastToggle2" class="btn" aria-pressed="false">High Contrast</button>
+<label class="toggle">
+<input type="checkbox" id="reduceMotionToggle2" />
+<span>Reduce motion</span>
+</label>
+
+<details>
+<summary>Keyboard tips</summary>
+<ul>
+<li>Use Tab/Shift+Tab to move focus</li>
+<li>Press Enter on “Details” buttons to expand cards</li>
+<li>Use “Save” to bookmark items</li>
+</ul>
+</details>
+</aside>
+
+<section class="results" aria-labelledby="results-title">
+<h1 id="results-title">Listings</h1>
+<div id="resultsGrid" class="cards" data-empty-msg="No results found. Try clearing filters."></div>
+<p id="resultsStatus" class="visually-hidden" aria-live="polite"></p>
+<template id="cardTpl">
+</html>

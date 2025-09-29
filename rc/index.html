@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ralphie’s Closet — CU Student Clothing Resale</title>
+  <meta name="description" content="A CU Boulder student-to-student clothing resale app: try on before you buy, meet on campus, no shipping, no outsiders." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/logo.png" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="brand">
+      <!-- logo -->
+      <img class="site-logo" src="e1764e98-5bca-4e0a-ae55-97b5b725e935.png" alt="Ralphie’s Closet logo" width="200" height="200" />
+      <span class="brand-text">Ralphie’s Closet</span>
+    </div>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+      <span class="sr-only">Toggle navigation</span>
+      ☰
+    </button>
+
+    <nav id="primary-nav" class="site-nav" aria-label="Primary">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#faq">FAQ</a>
+      <a href="#press" class="press-link">Press</a>
+      <a href="#cta" class="cta-link">Join waitlist</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Buy, sell, and trade clothes—only with CU students</h1>
+        <p class="lead">
+          Log in with your CU Identity Key, meet on campus, try on before you buy. No shipping, no outsiders.
+        </p>
+        <form class="waitlist" id="waitlist-form" aria-labelledby="waitlist-label">
+          <label id="waitlist-label" for="email">Join the early access list</label>
+          <div class="waitlist-row">
+            <input id="email" name="email" type="email" placeholder="you@colorado.edu" required aria-required="true" />
+            <button type="submit" class="btn">Notify me</button>
+          </div>
+          <p class="form-hint">Use your colorado.edu email for priority access.</p>
+          <div class="form-msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="hero-visual" role="img" aria-label="Students exchanging clothes on CU Boulder campus"></div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features">
+      <h2>Built for campus life</h2>
+      <div class="features-grid">
+        <article class="feature-card">
+          <h3>CU-only</h3>
+          <p>Verify with your CU Identity Key for a student-only marketplace.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Meet on campus</h3>
+          <p>Trade in safe, familiar locations—no shipping required.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Try before you buy</h3>
+          <p>Avoid sizing guesswork and returns. See the item in person.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Zero shipping fees</h3>
+          <p>Keep costs low and transactions fast with local hand-offs.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Student-friendly pricing</h3>
+          <p>Buy and sell at fair prices that make sense for students.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Privacy & safety</h3>
+          <p>Simple controls over what you share and who can contact you.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="hiw">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><strong>Verify</strong> your CU status with your Identity Key.</li>
+        <li><strong>List</strong> items in seconds with photos and size info.</li>
+        <li><strong>Meet</strong> on campus to trade—try on before you buy.</li>
+        <li><strong>Save</strong> money and keep good clothes in circulation.</li>
+      </ol>
+    </section>
+
+    <!-- SUSTAINABILITY -->
+    <section id="sustainability" class="sustain">
+      <h2>Less waste, more wear</h2>
+      <div class="sustain-grid">
+        <p>
+          Ralphie’s Closet keeps clothing local and in use. By cutting shipping and third-party fees, the platform helps students earn and save money while reducing environmental impact.
+        </p>
+        <ul>
+          <li>Fewer shipments and returns</li>
+          <li>Longer life for quality pieces</li>
+          <li>Lower footprint for student budgets</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Who can join?</summary>
+        <p>Current CU Boulder students. Sign-in requires a CU Identity Key.</p>
+      </details>
+      <details>
+        <summary>Is it safe to meet?</summary>
+        <p>We recommend busy, public campus locations during daylight hours.</p>
+      </details>
+      <details>
+        <summary>When does it launch?</summary>
+        <p>We are preparing a pilot this semester. Join the waitlist for updates.</p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="cta">
+      <h2>Be first to know</h2>
+      <p>Sign up with your colorado.edu email for early access.</p>
+      <form class="waitlist waitlist-alt" id="waitlist-form-2" aria-labelledby="waitlist-label-2">
+        <label id="waitlist-label-2" for="email-2" class="sr-only">Email</label>
+        <div class="waitlist-row">
+          <input id="email-2" name="email" type="email" placeholder="you@colorado.edu" required aria-required="true" />
+          <button type="submit" class="btn btn-secondary">Join waitlist</button>
+        </div>
+        <div class="form-msg" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Ralphie’s Closet. Student-run at CU Boulder.</p>
+    <button class="press-link footer-press">Read press release</button>
+  </footer>
+
+  <!-- PRESS RELEASE MODAL -->
+  <dialog id="press-modal" aria-labelledby="press-title">
+    <article class="press">
+      <header class="press-header">
+        <h2 id="press-title">Press Release</h2>
+        <button class="close-modal" aria-label="Close">×</button>
+      </header>
+      <div class="press-body">
+        <p><strong>FOR IMMEDIATE RELEASE</strong></p>
+        <h3>New Clothing Re-sale App, Ralphie’s Closet, Set To Launch for University of Colorado Boulder Students</h3>
+        <p><em>Boulder, Colorado — September 18, 2025</em> — A new student-run startup, Ralphie’s Closet, today announced the upcoming launch of its clothing re-sale platform made exclusively for CU Boulder students. The app enables students to buy, sell, and trade clothing directly with peers on campus—no shipping, no guesswork, no outsiders.</p>
+        <p>“I love starting each semester organized, which means going through my closet and asking, ‘Do I really love this?’ … There had to be a better way, and the answer was right in front of me: 40,000 students all packed into one town, most with overflowing closets.”</p>
+        <p>Ralphie’s Closet keeps transactions student-to-student and local. Users log in with the CU Identity Key to verify campus affiliation, post items for sale, browse listings, and meet on campus to exchange clothes safely and quickly. This makes it easy to try things on before purchasing, avoid unreliable sizing, and save money.</p>
+        <p>The app supports sustainability by keeping clothing in circulation and out of landfills while reducing costs and environmental impact by cutting shipping and third-party fees. The team plans to roll out the app to CU students later this semester.</p>
+      </div>
+      <footer class="press-footer">
+        <button class="btn close-modal">Close</button>
+      </footer>
+    </article>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
