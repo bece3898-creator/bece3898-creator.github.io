@@ -1,11 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Typography Demo</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    .demo-header {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .demo-header h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .demo-header p {
+      color: #555;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+    }
+
+    /* Theme switch button */
+    .theme-toggle {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 15px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .dark-mode {
+      background: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    .dark-mode .demo-header {
+      background: #333;
+    }
+
+    .dark-mode .theme-toggle {
+      background: #f5f5f5;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    
+  <div class="demo-header">
+    <h1>Responsive Typography Demo</h1>
+    <p>This text uses <code>clamp()</code> to adjust font size depending on the screen width.</p>
+    <button class="theme-toggle" id="themeButton">Toggle Theme</button>
+  </div>
+
+  <script>
+    // --- Local Storage Theme Preference ---
+    const body = document.body;
+    const themeButton = document.getElementById('themeButton');
+
+    // Check if user saved a theme before
+    const savedTheme = localStorage.getItem('userTheme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+    }
+
+    themeButton.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      // Save preference
+      const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('userTheme', currentTheme);
+    });
+  </script>
 </body>
 </html>
