@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CU Student Clothing Exchange – Listings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header compact" role="banner">
+    <a class="brand brand-link" href="index.html">CU Student Clothing Exchange</a>
+
+    <form class="toolbar" id="filterForm" action="resources.html" method="get" aria-label="Filter listings">
+      <!-- Progressive enhancement: works without JS -->
+      <label for="search" class="visually-hidden">Search listings</label>
+      <input id="search" name="q" type="search" placeholder="Search by keyword" />
+
+      <label for="category" class="visually-hidden">Category</label>
+      <select id="category" name="cat">
+        <option value="">All categories</option>
+        <option value="tops">Tops</option>
+        <option value="outerwear">Outerwear</option>
+        <option value="bottoms">Bottoms</option>
+        <option value="shoes">Shoes</option>
+      </select>
+
+      <label for="size" class="visually-hidden">Size</label>
+      <select id="size" name="size">
+        <option value="">Any size</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+
+      <button class="btn" type="submit">Apply</button>
+    </form>
+  </header>
+
+  <main id="main" class="grid-resources" role="main">
+    <aside class="sidebar" aria-labelledby="a11y-title">
+      <h2 id="a11y-title">Accessibility & Preferences</h2>
+      <button id="contrastToggle2" class="btn" aria-pressed="false">High Contrast</button>
+      <label class="toggle">
+        <input type="checkbox" id="reduceMotionToggle2" />
+        <span>Reduce motion</span>
+      </label>
+
+      <details>
+        <summary>Keyboard tips</summary>
+        <ul>
+          <li>Use Tab/Shift+Tab to move focus</li>
+          <li>Press Enter on “Details” to expand cards</li>
+          <li>Use “Save” to bookmark items</li>
+        </ul>
+      </details>
+    </aside>
+
+    <section class="results" aria-labelledby="results-title">
+      <h1 id="results-title">Listings</h1>
+      <div id="resultsGrid" class="cards" data-empty-msg="No results found. Try clearing filters."></div>
+      <p id="resultsStatus" class="visually-hidden" aria-live="polite"></p>
+
+      <template id="cardTpl">
+        <article class="card" tabindex="0">
+          <img alt="" loading="lazy" />
+          <div class="card-body">
+            <h3></h3>
+            <p class="meta"></p>
+            <div class="actions">
+              <button class="btn btn-small" data-action="save">Save</button>
+              <button class="btn btn-small" data-action="details" aria-expanded="false">Details</button>
+            </div>
+            <div class="details" hidden></div>
+          </div>
+        </article>
+      </template>
+    </section>
+
+    <section class="tips" aria-labelledby="tips-title">
+      <h2 id="tips-title">Safe Meetups</h2>
+      <ol>
+        <li>Meet on campus in public spaces</li>
+        <li>Bring your Buff OneCard</li>
+        <li>Try on items before paying</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> CU Student Clothing Exchange</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
