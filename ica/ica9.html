@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Success Feedback</title>
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;font:16px/1.4 system-ui;background:#111;color:#eee}
+  .box{width:min(420px,92vw);background:#1b1b1b;padding:16px;border-radius:10px}
+  label{display:block;margin-bottom:6px}
+  input{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:#eee}
+  .row{display:flex;gap:8px;margin-top:10px}
+  button{padding:10px 14px;border:0;border-radius:8px;background:#2b8cff;color:#fff;font-weight:600;cursor:pointer}
+  .error{color:#ff6b6b;display:none;margin-top:8px}
+  .ok{display:none;margin-top:10px;padding:8px 10px;border-radius:8px;background:#0f1a15;color:#baf3d0;opacity:0;
+      transition:opacity 300ms ease-out}
+  .ok.show{display:block;opacity:1}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+  <main class="box" aria-labelledby="h">
+    <h1 id="h" style="margin:0 0 8px;font-size:1rem">Newsletter signup</h1>
+
+    <label for="email">Email</label>
+    <input id="email" type="email" placeholder="you@example.edu" required />
+
+    <div class="row">
+      <button id="go">Sign up</button>
+    </div>
+
+    <p id="err" class="error">Enter a valid email.</p>
+    <p id="ok" class="ok" role="status" aria-live="polite">Success! You’re signed up.</p>
+  </main>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const email = $('email'), err = $('err'), ok = $('ok'), go = $('go');
+  const valid = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  go.addEventListener('click', e => {
+    e.preventDefault();
+    const v = email.value.trim();
+
+    if (!valid(v)) {
+      ok.classList.remove('show');
+      err.style.display = 'block';
+      email.setAttribute('aria-invalid','true');
+      email.focus();
+      return;
+    }
+    err.style.display = 'none';
+    email.removeAttribute('aria-invalid');
+    email.value = '';
+
+    // restart simple fade-in
+    ok.classList.remove('show');
+    void ok.offsetWidth;
+    ok.classList.add('show');
+  });
+</script>
+</body>
+</html>
