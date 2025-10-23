@@ -88,7 +88,7 @@ a:focus,button:focus,input:focus,summary:focus{outline:3px solid var(--focus); o
 }
 .lead{font-size:1.1rem; color:var(--muted); max-width:56ch}
 
-.waitlist{margin-top:1.25rem}
+.waitlist{margin-top:4rem}
 .waitlist label{display:block; margin-bottom:.4rem; color:var(--muted)}
 .waitlist-row{display:flex; gap:.6rem}
 .waitlist input{
@@ -133,10 +133,14 @@ a:focus,button:focus,input:focus,summary:focus{outline:3px solid var(--focus); o
 .sustain{padding:2.5rem 1rem; max-width:1000px; margin:0 auto}
 .sustain h2{color:var(--gold)}
 .sustain-grid{
-  display:grid; gap:1rem; grid-template-columns: 2fr 1fr;
-  background:var(--surface);
-  border:1px solid rgba(207,184,124,.18);
-  border-radius:var(--radius); padding:1rem;
+  background-color: #111;         /* dark background like in your screenshot */
+  color: #f5f5f5;                 /* readable light text */
+  padding: 1.5rem 2rem;           /* space inside the box */
+  border-radius: 0.75rem;         /* rounded corners */
+  border: 1px solid #222;         /* subtle border for contrast */
+  width: 100%;                    /* makes the box full width of its container */
+  max-width: 800px;               /* optional: limit for large screens */
+  margin-top: 1rem;               /* space above the box */
 }
 
 /* FAQ */
@@ -176,7 +180,6 @@ dialog{
 dialog::backdrop{background:rgba(0,0,0,.7)}
 .press{display:grid; grid-template-rows:auto 1fr auto}
 .press-header, .press-footer{padding:1rem; border-bottom:1px solid rgba(207,184,124,.18)}
-.press-footer{border-top:1px solid rgba(207,184,124,.18); border-bottom:none}
 .press-header{display:flex; align-items:center; justify-content:space-between}
 .press-body{padding:1rem; max-height:min(70vh, 70svh); overflow:auto}
 .close-modal{
@@ -209,4 +212,64 @@ dialog::backdrop{background:rgba(0,0,0,.7)}
     transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
   }
   .feature-card:hover{transform:translateY(-2px)}
+}
+/* 1) One container width for all sections */
+.container {
+  max-width: 820px;      /* match the width of your steps */
+  margin: 0 auto;
+  padding: 0 16px;       /* gutter */
+}
+
+/* 2) One reusable card style for boxes */
+.card {
+  background: #111;
+  color: #f5f5f5;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+/* Optional: consistent vertical rhythm */
+.section-gap { margin-top: 64px; }
+/* Shared container width */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Shared card style */
+.card {
+  background: #111;
+  color: #f5f5f5;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+/* Consistent vertical spacing between sections */
+.section-gap {
+  margin-top: 64px;
+}
+
+/* Restore gold section headings */
+h2, h3 {
+  color: #CFB87C; /* CU Boulder gold */
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+/* Even vertical spacing between all sections */
+section {
+  margin-top: 80px;      /* space above each section */
+  margin-bottom: 80px;   /* space below each section */
+}
+
+/* Remove double spacing for stacked .section-gap sections */
+.section-gap + .section-gap {
+  margin-top: 0;
+}
+
+/* Optional: keep hero closer to header */
+.hero {
+  margin-top: 40px;
 }
