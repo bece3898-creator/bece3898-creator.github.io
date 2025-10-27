@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>wa10 — Random Quote Machine</title>
-  <link rel="stylesheet" href="wa10.css" />
+  <title>Random Quote Machine</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="app">
@@ -25,7 +25,6 @@
         Show author
       </button>
 
-      <!-- Extension #2: tweet the current quote -->
       <button type="button" id="js-tweet" class="tweet button" disabled>
         Tweet this quote
       </button>
@@ -33,13 +32,14 @@
 
     <section class="writeup">
       <p class="blurb">
-        Extension: I added a loading state and a “Tweet this quote” button that opens a pre-filled tweet with the quote and author.
+        Extension: I added a loading state (spinner and disabled the buttons during fetch) and a “Tweet this quote” button that opens a prefilled tweet with the quote and author.
       </p>
       <p class="blurb">
-        How I could use an API in my critique project: I could pull public data (like quotes, definitions, or like news summaries) to show how interfaces frame information. A simple, no auth JSON API keeps things easy while still letting me explore filtering and formatting.
+        How I could use an API in my critique project: I could pull public data to show how interfaces frame information. A simple, no-auth JSON API keeps the build simple while letting me explore filtering and accessibility.
+      </p>
     </section>
   </div>
 
-  <script src="wa10.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

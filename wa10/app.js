@@ -1,6 +1,6 @@
 // Elements
 const newQuoteBtn   = document.querySelector('#js-new-quote');
-const showAuthorBtn = document.querySelector('#js-show-answer');
+const showAuthorBtn = document.querySelector('#js-show-answer'); // keep existing id/label structure
 const tweetBtn      = document.querySelector('#js-tweet');
 const quoteEl       = document.querySelector('#js-quote-text');
 const authorEl      = document.querySelector('#js-answer-text');
@@ -28,7 +28,7 @@ function setLoading(isLoading) {
   newQuoteBtn.disabled = isLoading;
   showAuthorBtn.disabled = isLoading;
   tweetBtn.disabled = isLoading || !currentQuote;
-  // FIX: show spinner while loading
+  // show spinner while loading
   spinnerEl.setAttribute('aria-hidden', isLoading ? 'false' : 'true');
 }
 
@@ -44,13 +44,11 @@ async function getQuote() {
   setLoading(true);
 
   try {
-    // try once
     let data;
     try {
       data = await fetchQuotable();
-    } catch (e) {
-      // quick retry once after a short delay
-      await new Promise(r => setTimeout(r, 400));
+    } catch {
+      await new Promise(r => setTimeout(r, 400)); // quick retry
       data = await fetchQuotable();
     }
 
@@ -63,12 +61,9 @@ async function getQuote() {
 
   } catch (err) {
     console.error('Quote fetch failed:', err);
-
-    // Use a fallback so the UI still works
     const f = FALLBACKS[Math.floor(Math.random() * FALLBACKS.length)];
     currentQuote = f.content;
     currentAuthor = f.author;
-
     quoteEl.textContent = `“${currentQuote}”`;
     authorEl.textContent = `— ${currentAuthor}`;
     tweetBtn.disabled = false;

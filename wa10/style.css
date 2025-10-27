@@ -15,9 +15,9 @@ body {
   transform: translate(-50%, -50%);
   width: min(680px, 94vw);
   background-color: #fff;
-  border-radius: 0;            /* no rounded corners, per your style */
-  box-shadow: none;            /* no drop shadow */
-  border: 1px solid #e5e5e5;   /* subtle edge to separate from bg */
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid #e5e5e5;
 }
 
 /* header */
@@ -29,19 +29,28 @@ header {
   border-bottom: 1px solid transparent; /* visually no divider */
 }
 
-/* quote area */
+/* quote area (centered text) */
 .quotes {
   padding: 22px 28px;
   min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* horizontal centering */
+  justify-content: center;  /* vertical centering */
+  text-align: center;
 }
 
 .quote-text {
   font-size: 22px;
   color: #000;
   padding-bottom: 14px;
+  max-width: 85%;
 }
 
-.author { font-size: 18px; color: #444; }
+.author {
+  font-size: 18px;
+  color: #444;
+}
 
 /* spinner (loading) */
 .spinner {
@@ -76,39 +85,21 @@ header {
   font-size: 18px;
 }
 
-.new-quote {
-  background-color: #4A2B0F;
-}
+.new-quote { background-color: #4A2B0F; }
 .new-quote:hover { background-color: #6d3b0e; }
-.new-quote:disabled {
-  background-color: #cccccc; color: #666; cursor: not-allowed;
-}
+.new-quote:disabled { background-color: #ccc; color: #666; cursor: not-allowed; }
 
-.twitter {
-  background-color: #1da1f2;
-}
+.twitter { background-color: #1da1f2; }
 .twitter:hover { background-color: #1e7fbb; }
-.twitter:disabled {
-  background-color: #9ccff0; color: #e8f4fd; cursor: not-allowed;
-}
+.twitter:disabled { background-color: #9ccff0; color: #e8f4fd; cursor: not-allowed; }
 
-.tweet {
-  background-color: #222;
-}
+.tweet { background-color: #222; }
 .tweet:hover { background-color: #444; }
-.tweet:disabled {
-  background-color: #aaa; color: #eee; cursor: not-allowed;
-}
+.tweet:disabled { background-color: #aaa; color: #eee; cursor: not-allowed; }
 
 /* write-up paragraphs */
-.writeup {
-  padding: 8px 28px 24px;
-}
-.blurb {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #222;
-}
+.writeup { padding: 8px 28px 24px; }
+.blurb { margin-top: 10px; font-size: 16px; color: #222; }
 
 /* responsive */
 @media (max-width: 520px) {
