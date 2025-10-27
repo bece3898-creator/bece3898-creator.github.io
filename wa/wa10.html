@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>wa10 — Random Quote Machine</title>
+  <link rel="stylesheet" href="wa10.css" />
+</head>
+<body>
+  <div class="app">
+    <header>Random Quote Machine</header>
+
+    <section class="quotes" aria-live="polite">
+      <div class="quote-text" id="js-quote-text">Loading a quote…</div>
+      <div class="quote-text author" id="js-answer-text" style="display:none;"></div>
+      <div class="spinner" id="js-spinner" aria-hidden="true"></div>
+    </section>
+
+    <section class="controls">
+      <button type="button" id="js-new-quote" class="new-quote button">
+        Generate a new quote
+      </button>
+
+      <button type="button" id="js-show-answer" class="twitter button">
+        Show author
+      </button>
+
+      <!-- Extension #2: tweet the current quote -->
+      <button type="button" id="js-tweet" class="tweet button" disabled>
+        Tweet this quote
+      </button>
+    </section>
+
+    <section class="writeup">
+      <p class="blurb">
+        Extension: I added a loading state and a “Tweet this quote” button that opens a pre-filled tweet with the quote and author.
+      </p>
+      <p class="blurb">
+        How I could use an API in my critique project: I could pull public data (like quotes, definitions, or like news summaries) to show how interfaces frame information. A simple, no auth JSON API keeps things easy while still letting me explore filtering and formatting.
+    </section>
+  </div>
+
+  <script src="wa10.js" defer></script>
+</body>
+</html>
