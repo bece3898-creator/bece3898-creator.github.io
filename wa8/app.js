@@ -1,6 +1,3 @@
-/* =============================
-   Utilities & State
-============================= */
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
@@ -26,9 +23,6 @@ function applyPrefs() {
   document.documentElement.classList.toggle('motion', !state.prefs.reduceMotion);
 }
 
-/* =============================
-   Prefs UI (mirrored controls)
-============================= */
 function initPrefsUI() {
   const pairs = [
     { key: 'highContrast', btn: $('#contrastToggle'), mirrorBtn: $('#contrastToggle2'), type: 'button' },
@@ -61,20 +55,14 @@ function initPrefsUI() {
   });
 }
 
-/* =============================
-   Announce helper (a11y)
-============================= */
+
 function announce(msg) {
   const live = $('#live');
   if (!live) return;
   live.textContent = '';
-  // next frame to ensure change is detected by AT
   requestAnimationFrame(() => (live.textContent = msg));
 }
 
-/* =============================
-   Spotlight cards (Home)
-============================= */
 function initSpotlightCards() {
   $$('.spotlight .card').forEach(card => {
     card.addEventListener('click', (e) => {
@@ -105,7 +93,6 @@ function initSpotlightCards() {
       }
     });
 
-    // Keyboard: Enter toggles details
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         const btn = $('[data-action="details"]', card);
@@ -113,7 +100,6 @@ function initSpotlightCards() {
       }
     });
 
-    // Initialize save button text
     const saveBtn = $('[data-action="save"]', card);
     if (saveBtn?.dataset.id) {
       saveBtn.textContent = state.prefs.saved.has(saveBtn.dataset.id) ? 'Saved' : 'Save';
@@ -121,9 +107,6 @@ function initSpotlightCards() {
   });
 }
 
-/* =============================
-   Listings data & filter
-============================= */
 const MOCK_DATA = [
   { id: 'c1', title: 'Winter Coat (M)', cat: 'outerwear', size: 'M', price: 35, img: 'images/coat.jpg', w: 640, h: 480, details: 'Condition: Excellent. Pickup at UMC.' },
   { id: 'c2', title: 'Leather Boots (9)', cat: 'shoes', size: 'M', price: 20, img: 'images/boots.jpg', w: 640, h: 480, details: 'Toe scuffs. Pickup at Norlin.' },
@@ -155,7 +138,6 @@ function filterData(root = document) {
 }
 
 function cardImageHTML(item) {
-  // Add width/height to prevent CLS; provide srcset for perf
   const src = item.img;
   const src2x = item.img.replace('.jpg', '@2x.jpg');
   return `
@@ -209,7 +191,7 @@ function renderResults(items, root = document) {
         else state.prefs.saved.add(item.id);
         persistSaved();
         t.textContent = state.prefs.saved.has(item.id) ? 'Saved' : 'Save';
-        renderSavedSection(); // keep Saved in sync if present on this page
+        renderSavedSection(); 
       }
       if (t.dataset.action === 'details') {
         const details = document.getElementById(`${item.id}-details`);
@@ -222,7 +204,6 @@ function renderResults(items, root = document) {
       }
     });
 
-    // Key support — Enter opens details
     article.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') article.querySelector('[data-action="details"]')?.click();
     });
@@ -234,9 +215,7 @@ function renderResults(items, root = document) {
   status.textContent = `${items.length} result${items.length === 1 ? '' : 's'} loaded.`;
 }
 
-/* =============================
-   Saved section (Home & Listings)
-============================= */
+
 function renderSavedSection() {
   const wrap = $('#savedSection');
   if (!wrap) return;
@@ -257,14 +236,12 @@ function renderSavedSection() {
 
   wrap.innerHTML = `<ul class="saved-list">${list}</ul>`;
 
-  // Unsave controls
   $$('[data-unsave]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-unsave');
       state.prefs.saved.delete(id);
       persistSaved();
       renderSavedSection();
-      // If we're on listings, update cards
       $$('#resultsGrid [data-action="save"]').forEach(b => {
         if (b.dataset.id === id) b.textContent = 'Save';
       });
@@ -277,14 +254,10 @@ function updateSavedBadge() {
   if (badge) badge.textContent = String(state.prefs.saved.size);
 }
 
-/* =============================
-   Listings page init
-============================= */
 function initListingsPage() {
   const grid = $('#resultsGrid');
   if (!grid) return;
 
-  // Seed form inputs with URL params (so back/links are reflected)
   const q = qsParam('q'), cat = qsParam('cat'), size = qsParam('size');
   if ($('#search')) $('#search').value = q || '';
   if ($('#category')) $('#category').value = cat || '';
@@ -292,13 +265,11 @@ function initListingsPage() {
 
   renderResults(filterData(document), document);
 
-  // Live filtering (doesn't navigate away)
   const form = $('#filterForm');
   if (form) {
     form.addEventListener('input', (e) => {
       if (!(e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement)) return;
       renderResults(filterData(document), document);
-      // Reflect state to URL (no reload) for shareability
       const params = new URLSearchParams(new FormData(form)).toString();
       const url = params ? `resources.html?${params}` : 'resources.html';
       history.replaceState(null, '', url);
@@ -306,9 +277,7 @@ function initListingsPage() {
   }
 }
 
-/* =============================
-   Events loader (Home) - external JSON
-============================= */
+
 async function loadEvents() {
   const list = $('#eventsList');
   const loading = $('#eventsLoading');
@@ -317,10 +286,9 @@ async function loadEvents() {
 
   loading.hidden = false;
   try {
-    // Replace with a real endpoint later if desired
     const res = await fetch('events.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('Network');
-    const events = await res.json(); // [{when, what}]
+    const events = await res.json(); 
     if (!Array.isArray(events)) throw new Error('Malformed');
 
     list.innerHTML = events.map(e => `<li><strong>${e.when}:</strong> ${e.what}</li>`).join('');
@@ -333,9 +301,6 @@ async function loadEvents() {
   }
 }
 
-/* =============================
-   Init
-============================= */
 function initFooterYear() {
   const y = $('#year');
   if (y) y.textContent = String(new Date().getFullYear());

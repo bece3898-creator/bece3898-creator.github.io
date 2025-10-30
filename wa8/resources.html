@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CU Student Clothing Exchange – Listings</title>
 
-  <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- This file must live next to this HTML inside /wa8 -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -22,7 +20,6 @@
     </a>
 
     <form class="toolbar" id="filterForm" action="resources.html" method="get" aria-label="Filter listings">
-      <!-- Progressive enhancement: works without JS -->
       <label for="search" class="visually-hidden">Search listings</label>
       <input id="search" name="q" type="search" placeholder="Search by keyword" />
 
@@ -71,11 +68,9 @@
     <section class="results" aria-labelledby="results-title">
       <h1 id="results-title">Listings</h1>
 
-      <!-- Results grid populated by app.js -->
       <div id="resultsGrid" class="cards" data-empty-msg="No results found. Try clearing filters."></div>
       <p id="resultsStatus" class="visually-hidden" aria-live="polite"></p>
 
-      <!-- Card template used by app.js -->
       <template id="cardTpl">
         <article class="card" tabindex="0">
           <img alt="" loading="lazy" />
@@ -106,7 +101,6 @@
     <p>&copy; <span id="year"></span> CU Student Clothing Exchange</p>
   </footer>
 
-  <!-- Must point to the file in the same /wa8 folder -->
   <script src="app.js" defer></script>
 </body>
 </html>
