@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book Search</title>
+<style>
+  body{margin:0;font-family:Arial,sans-serif}
+  main{max-width:720px;margin:20px auto;padding:0 12px}
+  input{width:100%;padding:6px}
+  button{padding:6px 10px;margin:4px 2px 0 0;background:#eee;cursor:pointer;border:none}
+  ul{list-style:none;padding:0;margin:8px 0}
+  li{padding:8px 0;margin:6px 0;border:none}
+  #status{margin:8px 0}
+</style>
+</head>
+<body>
+<main>
+  <h1>Book Search</h1>
+
+  <form id="search-form">
+    <input id="q" type="text" required />
+    <button type="submit">Search</button>
+  </form>
+
+  <div id="status"></div>
+  <ul id="results"></ul>
+
+  <h2>Favorites</h2>
+  <div>
+    <button id="export" type="button">Export JSON</button>
+    <button id="clear" type="button">Clear All</button>
+  </div>
+  <ul id="favs"></ul>
+</main>
+
+<script>
+const favKey='book_favs_min';
+const form=document.getElementById('search-form');
+const q=document.getElementById('q');
+const statusEl=document.getElementById('status');
+const resultsEl=document.getElementById('results');
+const favsEl=document.getElementById('favs');
+const exportBtn=document.getElementById('export');
+const clearBtn=document.getElementById('clear');
+
+let favs=loadFavs(); renderFavs();
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const term=q.value.trim(); if(!term)return;
+  statusEl.textContent='Loading...'; resultsEl.innerHTML='';
+  try{
+    const r=await fetch('https://www.googleapis.com/books/v1/volumes?q='+encodeURIComponent(term)+'&maxResults=10');
+    if(!r.ok)throw 0;
+    const data=await r.json();
+    const items=data.items||[];
+    statusEl.textContent=items.length?'Results:':'No results.';
+    renderResults(items);
+  }catch(_){
+    statusEl.textContent='Error: API failed.';
+  }
+});
+
+exportBtn.addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(favs,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='favorites.json';
+  a.click();URL.revokeObjectURL(a.href);
+});
+
+clearBtn.addEventListener('click',()=>{
+  if(confirm('Delete all favorites?')){favs=[];saveFavs();}
+});
+
+function loadFavs(){try{return JSON.parse(localStorage.getItem(favKey)||'[]');}catch{return []}}
+function saveFavs(){localStorage.setItem(favKey,JSON.stringify(favs));renderFavs();}
+function isFav(id){return favs.some(x=>x.id===id);}
+
+function renderResults(items){
+  resultsEl.innerHTML='';
+  items.forEach(it=>{
+    const info=it.volumeInfo||{};
+    const id=it.id||info.title||Math.random().toString(36).slice(2);
+    const title=info.title||'Untitled';
+    const authors=(info.authors&&info.authors.join(', '))||'Unknown';
+    const li=document.createElement('li');
+    li.innerHTML='<div><strong>'+title+'</strong></div>'+
+                 '<div>'+authors+'</div>'+
+                 '<button class="fav">'+(isFav(id)?'Remove Favorite':'Add Favorite')+'</button>';
+    li.querySelector('.fav').addEventListener('click',()=>{
+      const b={id,title,authors};
+      if(isFav(id))favs=favs.filter(x=>x.id!==id);else favs.push(b);
+      saveFavs();renderResults(items);
+    });
+    resultsEl.appendChild(li);
+  });
+}
+
+function renderFavs(){
+  favsEl.innerHTML='';
+  favs.forEach(b=>{
+    const li=document.createElement('li');
+    li.innerHTML='<div><strong>'+b.title+'</strong></div>'+
+                 '<div>'+b.authors+'</div>'+
+                 '<button class="rm">Remove</button>';
+    li.querySelector('.rm').addEventListener('click',()=>{
+      favs=favs.filter(x=>x.id!==b.id);saveFavs();
+    });
+    favsEl.appendChild(li);
+  });
+}
+</script>
+</body>
+</html>
