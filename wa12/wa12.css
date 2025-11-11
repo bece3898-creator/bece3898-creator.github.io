@@ -1,4 +1,3 @@
-/* Form & buttons */
 label {
   display:block;
   margin:12px 0 6px;
@@ -14,7 +13,7 @@ input {
   padding:10px;
   border:1px solid #666;
   border-radius:4px;
-  margin-bottom:10px; /* adds separation between the field and button */
+  margin-bottom:10px; 
 }
 
 button {
