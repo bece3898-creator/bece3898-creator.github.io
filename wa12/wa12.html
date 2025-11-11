@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book Search</title>
+<link rel="stylesheet" href="wa12.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header>
+  <h1>Book Search</h1>
+</header>
+
+<main id="main" role="main" aria-describedby="page-desc">
+  <p id="page-desc" class="small">Search Google Books, add favorites, and export them as JSON.</p>
+
+  <form id="search-form" role="search" aria-describedby="search-help">
+    <label for="q">Search for books</label>
+    <input id="q" name="q" type="text" required autocomplete="off" />
+    <p id="search-help" class="visually-hidden">Type a query and press Enter to search.</p>
+    <button type="submit">Search</button>
+  </form>
+
+  <div id="status" role="status" aria-live="polite" aria-atomic="true" class="small"></div>
+
+  <section aria-labelledby="results-h2">
+    <h2 id="results-h2">Results</h2>
+    <ul id="results" aria-live="polite" aria-relevant="additions removals"></ul>
+  </section>
+
+  <section aria-labelledby="favs-h2">
+    <h2 id="favs-h2">Favorites</h2>
+    <div class="actions">
+      <button id="export" type="button">Export favorites (JSON)</button>
+      <button id="clear" type="button" aria-describedby="clear-warn">Clear all favorites</button>
+    </div>
+    <p id="clear-warn" class="visually-hidden">Clearing favorites deletes all saved items.</p>
+    <ul id="favs" aria-live="polite" aria-relevant="additions removals"></ul>
+  </section>
+</main>
+
+<footer class="small">
+  <p>Data from Google Books API.</p>
+</footer>
+
+<script>
+const favKey='book_favs_min';
+const form=document.getElementById('search-form');
+const q=document.getElementById('q');
+const statusEl=document.getElementById('status');
+const resultsEl=document.getElementById('results');
+const favsEl=document.getElementById('favs');
+const exportBtn=document.getElementById('export');
+const clearBtn=document.getElementById('clear');
+
+let favs=loadFavs(); renderFavs();
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const term=q.value.trim();
+  if(!term){announce('Please enter a search term.'); return;}
+  announce('Loading results…'); resultsEl.innerHTML='';
+  try{
+    const r=await fetch('https://www.googleapis.com/books/v1/volumes?q='+
+      encodeURIComponent(term)+'&maxResults=10');
+    if(!r.ok) throw 0;
+    const data=await r.json();
+    const items=data.items||[];
+    announce(items.length ? `Results: ${items.length}` : 'No results found.');
+    renderResults(items);
+  }catch(_){
+    announce('Error: API request failed.');
+  }
+});
+
+exportBtn.addEventListener('click',()=>{
+  if(!favs.length){announce('No favorites to export.'); return;}
+  const blob=new Blob([JSON.stringify(favs,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='favorites.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  announce('Favorites exported.');
+});
+
+clearBtn.addEventListener('click',()=>{
+  if(confirm('Delete all favorites?')){
+    favs=[];
+    saveFavs();
+    announce('All favorites cleared.');
+  }
+});
+
+function announce(msg){ statusEl.textContent=msg; }
+function loadFavs(){ try{return JSON.parse(localStorage.getItem(favKey)||'[]');}catch{return []} }
+function saveFavs(){ localStorage.setItem(favKey,JSON.stringify(favs)); renderFavs(); }
+function isFav(id){ return favs.some(x=>x.id===id); }
+
+function renderResults(items){
+  resultsEl.innerHTML='';
+  if(!items.length){
+    const li=document.createElement('li');
+    li.className='item';
+    li.textContent='Try a different search term.';
+    resultsEl.appendChild(li);
+    return;
+  }
+  items.forEach(it=>{
+    const info=it.volumeInfo||{};
+    const id=it.id||info.title||Math.random().toString(36).slice(2);
+    const title=info.title||'Untitled';
+    const authors=(info.authors&&info.authors.join(', '))||'Unknown author';
+    const li=document.createElement('li');
+    li.className='item';
+    const favored=isFav(id);
+    li.innerHTML=
+      `<div><strong>${title}</strong></div>
+       <div class="small">${authors}</div>
+       <div><button class="fav" aria-pressed="${favored}">
+         ${favored?'Remove from favorites':'Add to favorites'}
+       </button></div>`;
+    li.querySelector('.fav').addEventListener('click',()=>{
+      const b={id,title,authors};
+      if(isFav(id)) favs=favs.filter(x=>x.id!==id);
+      else favs.push(b);
+      saveFavs();
+      renderResults(items);
+      const nowFav=isFav(id);
+      announce(nowFav? `${title} added to favorites.` : `${title} removed from favorites.`);
+    });
+    resultsEl.appendChild(li);
+  });
+}
+
+function renderFavs(){
+  favsEl.innerHTML='';
+  if(!favs.length){
+    const li=document.createElement('li');
+    li.className='item';
+    li.textContent='No favorites yet.';
+    favsEl.appendChild(li);
+    return;
+  }
+  favs.forEach(b=>{
+    const li=document.createElement('li');
+    li.className='item';
+    li.innerHTML=
+      `<div><strong>${b.title}</strong></div>
+       <div class="small">${b.authors}</div>
+       <div><button class="rm">Remove</button></div>`;
+    li.querySelector('.rm').addEventListener('click',()=>{
+      favs=favs.filter(x=>x.id!==b.id);
+      saveFavs();
+      announce(`${b.title} removed from favorites.`);
+    });
+    favsEl.appendChild(li);
+  });
+}
+</script>
+</body>
+</html>
