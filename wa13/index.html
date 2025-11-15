@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Wikipedia System Critique</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page">
+
+  <h1 id="articleTitle">Loading...</h1>
+
+  <label for="languageSelect">Perspective:</label><br>
+  <select id="languageSelect">
+    <option value="en">English</option>
+    <option value="es">Spanish</option>
+    <option value="de">German</option>
+  </select>
+
+  <div id="bannerBox" class="bannerBox">
+    <strong>Coverage Balance</strong>
+    <p id="bannerMessage">Loading...</p>
+  </div>
+
+  <div class="meterBox">
+    <p><strong>Source Mix</strong></p>
+
+    <div class="bar">
+      <div id="academicBar" class="academic"></div>
+      <div id="newsBar" class="news"></div>
+      <div id="otherBar" class="other"></div>
+    </div>
+
+    <p class="legend">
+      Academic: <span id="academicText">-</span><br>
+      News: <span id="newsText">-</span><br>
+      Other: <span id="otherText">-</span>
+    </p>
+  </div>
+
+  <h2>Article Summary</h2>
+  <p id="summaryText">Loading summary...</p>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
