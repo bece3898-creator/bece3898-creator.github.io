@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Random Quote Machine</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>Random Quote Machine</header>
+
+    <section class="quotes" aria-live="polite">
+      <div class="quote-text" id="js-quote-text">Loading a quote…</div>
+      <div class="quote-text author" id="js-answer-text" style="display:none;"></div>
+      <div class="spinner" id="js-spinner" aria-hidden="true"></div>
+    </section>
+
+    <section class="controls">
+
+      <!-- New Buttons (btn-3) -->
+      <button type="button" id="js-new-quote" class="btn-3">
+        <span>Generate a new quote</span>
+      </button>
+
+      <button type="button" id="js-show-answer" class="btn-3">
+        <span>Show author</span>
+      </button>
+
+      <button type="button" id="js-tweet" class="btn-3" disabled>
+        <span>Tweet this quote</span>
+      </button>
+
+    </section>
+
+    <section class="writeup">
+      <p class="blurb">
+        Extension: I added a loading state (spinner and disabled buttons during fetch) and
+        a “Tweet this quote” button that opens a pre-filled tweet with the quote and author.
+      </p>
+      <p class="blurb">
+        How I could use an API in my critique project: I could pull public data (like quotes,
+        or like definitions) to show how interfaces frame information. A simple,
+        no-auth JSON API keeps the build simple while letting me explore filtering and formatting.
+      </p>
+    </section>
+  </div>
+
+  <noscript style="display:block; padding:1rem; color:#b00;">
+    This page needs JavaScript enabled to load quotes.
+  </noscript>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

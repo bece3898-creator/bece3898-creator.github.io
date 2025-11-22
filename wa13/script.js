@@ -1,4 +1,3 @@
-// REAL Wikipedia API data, minimal beginner code
 
 var pages = {
   en: { project: "en.wikipedia.org", title: "Environmentalism" },
@@ -22,13 +21,11 @@ var newsText = document.getElementById("newsText");
 var otherText = document.getElementById("otherText");
 
 
-// Switch languages
 languageSelect.addEventListener("change", function () {
   loadEverything(languageSelect.value);
 });
 
 
-// Load Wikipedia summary
 function loadSummary(project, title) {
   var url = "https://" + project + "/api/rest_v1/page/summary/" + encodeURIComponent(title);
 
@@ -51,7 +48,6 @@ function loadSummary(project, title) {
 }
 
 
-// Load external links and compute Source Mix
 function loadLinks(project, title) {
   var url =
     "https://" + project +
@@ -90,7 +86,6 @@ function loadLinks(project, title) {
       var nPct = total > 0 ? Math.round((newsCount / total) * 100) : 0;
       var oPct = total > 0 ? 100 - aPct - nPct : 0;
 
-      // Update bar widths (with animation)
       academicBar.style.width = aPct + "%";
       newsBar.style.width = nPct + "%";
       otherBar.style.width = oPct + "%";
