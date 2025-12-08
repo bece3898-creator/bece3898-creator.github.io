@@ -22,14 +22,12 @@
 </header>
 
 <main>
-  <!-- live region for announce() -->
   <div id="live" aria-live="polite" class="hidden"></div>
 
   <section class="hero">
     <h2>Buy, Sell, Swap All On Campus</h2>
     <p>CU students only. Meet in person, try before you buy!</p>
 
-    <!-- Home search form that sends q, cat, size to Listings -->
     <form id="homeSearchForm" action="resources.html" method="get" class="hero-form">
       <label class="hidden" for="q">Search listings</label>
       <input id="q" name="q" type="search">
@@ -52,7 +50,6 @@
     </form>
   </section>
 
-  <!-- Quick Filters that link directly to Listings with cat param -->
   <section>
     <h2>Quick filters</h2>
     <ul class="chip-list">
@@ -61,20 +58,17 @@
     </ul>
   </section>
 
-  <!-- Home Listings preview, using same card behavior as Listings page -->
   <section>
     <h2>Listings</h2>
     <div id="homeResults" class="cards"></div>
   </section>
 
-  <!-- Events with loading/error announcement -->
   <section>
     <h2>Events</h2>
     <ul id="eventsList"></ul>
     <p id="eventsLoading">No events yet :[.</p>
   </section>
 
-  <!-- Saved items section -->
   <section>
     <h2>Saved</h2>
     <div id="savedSection"></div>

@@ -21,12 +21,10 @@
 </header>
 
 <main>
-  <!-- live region for announce() -->
   <div id="live" aria-live="polite" class="hidden"></div>
 
   <h1>Listings</h1>
 
-  <!-- Filter form (q, cat, size) -->
   <form id="filterForm" action="resources.html" method="get" class="filter-form">
     <label class="hidden" for="search">Search listings</label>
     <input id="search" name="q" type="search">
@@ -48,10 +46,8 @@
     <button type="submit">Apply</button>
   </form>
 
-  <!-- results status for announce -->
   <p id="resultsStatus" aria-live="polite" class="status"></p>
 
-  <!-- Listings grid -->
   <div id="resultsGrid" class="cards"></div>
 </main>
 

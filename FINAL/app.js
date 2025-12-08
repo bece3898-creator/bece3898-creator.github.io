@@ -1,8 +1,6 @@
-// Simple helper selectors
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-/* prefs and saved state (proposal asked for comments here) */
 const state = {
   prefs: {
     highContrast: JSON.parse(localStorage.getItem("pref_highContrast") || "false"),
@@ -11,7 +9,6 @@ const state = {
   saved: new Set(JSON.parse(localStorage.getItem("savedItems") || "[]"))
 };
 
-/* announce helper (proposal requirement) */
 function announce(msg) {
   const live = $("#live");
   if (live) {
@@ -19,7 +16,6 @@ function announce(msg) {
   }
 }
 
-/* mock data: 2 items only */
 const DATA = [
   {
     id: "c1",
@@ -39,7 +35,6 @@ const DATA = [
   }
 ];
 
-/* save prefs and saved items */
 function savePrefs() {
   localStorage.setItem("pref_highContrast", JSON.stringify(state.prefs.highContrast));
   localStorage.setItem("pref_reduceMotion", JSON.stringify(state.prefs.reduceMotion));
@@ -50,7 +45,6 @@ function saveSaved() {
   updateSavedCount();
 }
 
-/* apply preferences to the page */
 function applyPrefs() {
   if (state.prefs.highContrast) {
     document.body.classList.add("hc");
@@ -59,7 +53,6 @@ function applyPrefs() {
   }
 }
 
-/* hook up preference buttons on both pages */
 function initPrefsUI() {
   const contrastButtons = [$("#contrastToggle"), $("#contrastToggle2")];
   contrastButtons.forEach(btn => {
@@ -71,7 +64,6 @@ function initPrefsUI() {
       applyPrefs();
       savePrefs();
       announce("High contrast " + (state.prefs.highContrast ? "on" : "off"));
-      // keep both buttons in sync
       contrastButtons.forEach(other => {
         if (other && other !== btn) {
           other.setAttribute("aria-pressed", state.prefs.highContrast ? "true" : "false");
@@ -93,7 +85,6 @@ function initPrefsUI() {
   applyPrefs();
 }
 
-/* get query param helper */
 function getParam(name) {
   try {
     const params = new URLSearchParams(window.location.search);
@@ -103,7 +94,6 @@ function getParam(name) {
   }
 }
 
-/* main card renderer used by Home and Listings (no duplicate logic) */
 function renderCards(container, items, statusEl) {
   if (!container) return;
   container.innerHTML = "";
@@ -144,17 +134,14 @@ function renderCards(container, items, statusEl) {
     card.appendChild(buttons);
     card.appendChild(details);
 
-    // save toggle
     saveBtn.addEventListener("click", () => {
       toggleSave(item.id);
     });
 
-    // details toggle
     detailsBtn.addEventListener("click", () => {
       details.hidden = !details.hidden;
     });
 
-    // Enter / Space toggle details when card is focused (proposal requirement)
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -170,11 +157,9 @@ function renderCards(container, items, statusEl) {
     announce(statusEl.textContent);
   }
 
-  // make sure save buttons reflect current saved state
   updateSaveButtons();
 }
 
-/* basic filtering for Listings */
 function filterData(q, cat, size) {
   const query = (q || "").toLowerCase();
   const category = cat || "";
@@ -188,7 +173,6 @@ function filterData(q, cat, size) {
   });
 }
 
-/* toggle saved status of an item (proposal: saved section + header count) */
 function toggleSave(id) {
   if (state.saved.has(id)) {
     state.saved.delete(id);
@@ -202,7 +186,6 @@ function toggleSave(id) {
   renderSavedSection();
 }
 
-/* update all save buttons based on current saved set */
 function updateSaveButtons() {
   $$(".save-btn").forEach(btn => {
     const id = btn.dataset.id;
@@ -213,7 +196,6 @@ function updateSaveButtons() {
   });
 }
 
-/* header saved count */
 function updateSavedCount() {
   const el = $("#savedCount");
   if (el) {
@@ -221,7 +203,6 @@ function updateSavedCount() {
   }
 }
 
-/* Saved section: show title + price (+ cat/size) */
 function renderSavedSection() {
   const wrap = $("#savedSection");
   if (!wrap) return;
@@ -254,13 +235,12 @@ function renderSavedSection() {
   });
 }
 
-/* Events: show loading and error clearly and announce (proposal) */
 async function loadEvents() {
   const list = $("#eventsList");
   const loading = $("#eventsLoading");
   const error = $("#eventsError");
   if (!list || !loading || !error) {
-    return; // not on this page
+    return; 
   }
 
   loading.classList.remove("hidden");
@@ -283,7 +263,6 @@ async function loadEvents() {
   }
 }
 
-/* Home page setup: render all items */
 function initHomePage() {
   const homeContainer = $("#homeResults");
   if (!homeContainer) return;
@@ -291,14 +270,12 @@ function initHomePage() {
   renderSavedSection();
 }
 
-/* Listings page setup: read params, prefill, filter, announce */
 function initListingsPage() {
   const grid = $("#resultsGrid");
   const form = $("#filterForm");
   const status = $("#resultsStatus");
   if (!grid || !form) return;
 
-  // prefill from URL
   const qParam = getParam("q");
   const catParam = getParam("cat");
   const sizeParam = getParam("size");
@@ -311,11 +288,9 @@ function initListingsPage() {
   if (catSelect) catSelect.value = catParam;
   if (sizeSelect) sizeSelect.value = sizeParam;
 
-  // initial render
   let current = filterData(qParam, catParam, sizeParam);
   renderCards(grid, current, status);
 
-  // update on input/change (live) and keep URL in sync
   function updateFromForm() {
     const q = searchInput ? searchInput.value : "";
     const cat = catSelect ? catSelect.value : "";
@@ -338,7 +313,6 @@ function initListingsPage() {
   });
 }
 
-/* main init */
 document.addEventListener("DOMContentLoaded", () => {
   initPrefsUI();
   updateSavedCount();
