@@ -1,0 +1,73 @@
+/* Basic page reset */
+body {
+  margin: 0;
+  padding: 20px; /* adds spacing from the left and right edges */
+  font-family: Arial, sans-serif;
+}
+
+/* Header layout */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: none; /* removed the line under the title */
+}
+
+/* Page titles */
+h1, h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Simple layout spacing */
+section {
+  margin-top: 25px;
+}
+
+/* Cards for listings */
+.card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+/* Accessible live region */
+#live {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Saved list styling */
+.saved-item {
+  margin-bottom: 10px;
+}
+
+/* Inputs */
+input, select {
+  padding: 6px;
+  margin-right: 10px;
+}
+
+/* Mobile spacing */
+@media (max-width: 800px) {
+  body {
+    padding: 10px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 20px;
+  }
+}

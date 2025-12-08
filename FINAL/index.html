@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CU Student Clothing Exchange – Home</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1>CU Student Clothing Exchange</h1>
+
+  <div class="prefs">
+    <button id="contrastToggle" aria-pressed="false">High contrast</button>
+    <label>
+      <input type="checkbox" id="reduceMotionToggle">
+      Reduce motion
+    </label>
+    <span>Saved: <span id="savedCount">0</span></span>
+  </div>
+</header>
+
+<main>
+  <!-- live region for announce() -->
+  <div id="live" aria-live="polite" class="hidden"></div>
+
+  <section class="hero">
+    <h2>Buy, Sell, Swap All On Campus</h2>
+    <p>CU students only. Meet in person, try before you buy!</p>
+
+    <!-- Home search form that sends q, cat, size to Listings -->
+    <form id="homeSearchForm" action="resources.html" method="get" class="hero-form">
+      <label class="hidden" for="q">Search listings</label>
+      <input id="q" name="q" type="search">
+
+      <label class="hidden" for="homeCat">Category</label>
+      <select id="homeCat" name="cat">
+        <option value="">All categories</option>
+        <option value="outerwear">Outerwear</option>
+        <option value="shoes">Shoes</option>
+      </select>
+
+      <label class="hidden" for="homeSize">Size</label>
+      <select id="homeSize" name="size">
+        <option value="">Any size</option>
+        <option value="M">M</option>
+        <option value="9">9</option>
+      </select>
+
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <!-- Quick Filters that link directly to Listings with cat param -->
+  <section>
+    <h2>Quick filters</h2>
+    <ul class="chip-list">
+      <li><a class="chip" href="resources.html?cat=outerwear">Outerwear</a></li>
+      <li><a class="chip" href="resources.html?cat=shoes">Shoes</a></li>
+    </ul>
+  </section>
+
+  <!-- Home Listings preview, using same card behavior as Listings page -->
+  <section>
+    <h2>Listings</h2>
+    <div id="homeResults" class="cards"></div>
+  </section>
+
+  <!-- Events with loading/error announcement -->
+  <section>
+    <h2>Events</h2>
+    <ul id="eventsList"></ul>
+    <p id="eventsLoading">No events yet :[.</p>
+  </section>
+
+  <!-- Saved items section -->
+  <section>
+    <h2>Saved</h2>
+    <div id="savedSection"></div>
+  </section>
+</main>
+
+<script src="app.js" defer></script>
+</body>
+</html>

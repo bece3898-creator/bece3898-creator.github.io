@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CU Student Clothing Exchange – Listings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html">Home</a>
+
+  <div class="prefs">
+    <button id="contrastToggle2" aria-pressed="false">High contrast</button>
+    <label>
+      <input type="checkbox" id="reduceMotionToggle2">
+      Reduce motion
+    </label>
+  </div>
+</header>
+
+<main>
+  <!-- live region for announce() -->
+  <div id="live" aria-live="polite" class="hidden"></div>
+
+  <h1>Listings</h1>
+
+  <!-- Filter form (q, cat, size) -->
+  <form id="filterForm" action="resources.html" method="get" class="filter-form">
+    <label class="hidden" for="search">Search listings</label>
+    <input id="search" name="q" type="search">
+
+    <label class="hidden" for="category">Category</label>
+    <select id="category" name="cat">
+      <option value="">All categories</option>
+      <option value="outerwear">Outerwear</option>
+      <option value="shoes">Shoes</option>
+    </select>
+
+    <label class="hidden" for="size">Size</label>
+    <select id="size" name="size">
+      <option value="">Any size</option>
+      <option value="M">M</option>
+      <option value="9">9</option>
+    </select>
+
+    <button type="submit">Apply</button>
+  </form>
+
+  <!-- results status for announce -->
+  <p id="resultsStatus" aria-live="polite" class="status"></p>
+
+  <!-- Listings grid -->
+  <div id="resultsGrid" class="cards"></div>
+</main>
+
+<script src="app.js" defer></script>
+</body>
+</html>
+
